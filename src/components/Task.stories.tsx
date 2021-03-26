@@ -1,5 +1,6 @@
 import React from 'react'
 import Task, { TaskProps } from './Task'
+import { Story } from '@storybook/react'
 
 const exp = {
   component: Task,
@@ -7,9 +8,9 @@ const exp = {
 }
 export default exp
 
-const Template = (args: TaskProps) => <Task {...args} />
+const Template: Story<TaskProps> = (args) => <Task {...args} />
 
-export const Default: any = Template.bind({})
+export const Default = Template.bind({})
 Default.args = {
   task: {
     id: '1',
@@ -19,18 +20,28 @@ Default.args = {
   },
 }
 
-export const Pinned: any = Template.bind({})
+export const Pinned = Template.bind({})
 Pinned.args = {
   task: {
-    ...Default.args.task,
+    ...(Default.args as TaskProps).task,
     state: 'TASK_PINNED',
   },
 }
 
-export const Archived: any = Template.bind({})
+export const Archived = Template.bind({})
 Archived.args = {
   task: {
-    ...Default.args.task,
+    ...(Default.args as TaskProps).task,
     state: 'TASK_ARCHIVED',
   },
 }
+
+const longTitleString = `This task's name is absurdly large. In fact, I think if I keep going I might end up with content overflow. What will happen? The star that represents a pinned task could have text overlapping. The text could cut-off abruptly when it reaches the star. I hope not!`;
+
+export const LongTitle = Template.bind({});
+LongTitle.args = {
+  task: {
+    ...(Default.args as TaskProps).task,
+    title: longTitleString,
+  }
+};
