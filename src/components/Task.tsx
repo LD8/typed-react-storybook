@@ -7,8 +7,8 @@ export interface TaskProps {
     state: string
     [key: string]: any
   }
-  onArchiveTask?: (id: string) => void
-  onPinTask?: (id: string) => void
+  onArchiveTask: (id: string) => void
+  onPinTask: (id: string) => void
 }
 
 const Task: React.FC<TaskProps> = ({
